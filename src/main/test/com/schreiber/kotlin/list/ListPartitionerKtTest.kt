@@ -52,7 +52,7 @@ class ListPartitionerKtTest {
     }
 
     @Test fun should_handle_really_big_lists() {
-        val list = getListOfSize(10000)
+        val list = getListOfSize(100000)
         list.myPartition(2)
     }
 
