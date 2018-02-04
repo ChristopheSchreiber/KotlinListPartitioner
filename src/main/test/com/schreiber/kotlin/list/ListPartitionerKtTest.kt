@@ -5,20 +5,24 @@ import org.junit.Test
 
 class ListPartitionerKtTest {
 
-    @Test fun empty_list_should_return_itself() {
-        assertEquals(emptyList<String>(), emptyList<String>().myPartition())
+    @Test fun empty_list_should_return_an_empty_list() {
+        assertEquals(emptyList<List<String>>(), emptyList<String>().myPartition())
     }
 
     @Test fun should_also_handle_integers() {
-        emptyList<Int>().myPartition()
+        assertEquals(emptyList<List<Int>>(), emptyList<Int>().myPartition())
     }
 
     @Test fun should_accept_different_partition_size() {
-        emptyList<Int>().myPartition(3)
+        assertEquals(emptyList<List<Int>>(), emptyList<Int>().myPartition(3))
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun partition_size_should_not_be_negative() {
+        emptyList<Int>().myPartition(-1)
     }
 
     @Test(expected = IllegalArgumentException::class) fun partition_size_should_be_strictly_greater_than_0() {
-        emptyList<Int>().myPartition(-1)
+        emptyList<Int>().myPartition(0)
     }
 
     @Test fun given_list_smaller_than_partition_size_should_return_the_a_list_containing_source_list() {
@@ -47,7 +51,7 @@ class ListPartitionerKtTest {
     }
 
     @Test fun should_handle_big_lists() {
-        val list = getListOfSize(100)
+        val list = getListOfSize(1000)
         list.myPartition(2)
     }
 
